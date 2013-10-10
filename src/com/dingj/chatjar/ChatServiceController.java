@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.widget.Toast;
 
 /**
  * @author dingj
@@ -36,7 +37,12 @@ public class ChatServiceController
 	public void init()
 	{
 		Intent intent = new Intent(mContext,ChatService.class);
-		mContext.bindService(intent, serviceConnect, Context.BIND_AUTO_CREATE);
+		boolean bind = mContext.bindService(intent, serviceConnect, Context.BIND_AUTO_CREATE);
+		if(!bind)
+		{
+			Toast.makeText(mContext, "bind service failed", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		SystemVar.gCCMsgControl.attach(mNotifyControl);
 	}
 	

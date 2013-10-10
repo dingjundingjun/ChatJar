@@ -29,7 +29,7 @@ public class ChatService extends Service
 	private Context mContext;
 	private final boolean DEBUG = true;
 	private final String TAG = "CharService";
-	private IBinder mIbinder = new CharBind();
+	private CharBind mIbinder = new CharBind();
 			
 	public class CharBind extends Binder
 	{
@@ -42,6 +42,10 @@ public class ChatService extends Service
 	@Override
 	public IBinder onBind(Intent intent)
 	{
+		if(DEBUG)
+		{
+			JDingDebug.printfD(TAG, "onBind" + mIbinder);
+		}
 		return mIbinder;
 	}
 	
